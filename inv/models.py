@@ -8,16 +8,66 @@ class Categoria(ClaseModelo):
         help_text='Descripcion de la categoria',
         unique=True,
     )
-
+    #Para cuando se haga referencia a categoria muestre la descripcion#
     def __str__(self):
         return '{}'.format(self.descripcion)
-
+    #Para guaradar la categoria en mayuscula#
     def save(self):
         self.descripcion = self.descripcion.upper()
         super(Categoria, self).save()
-
+    #Para guardar el nombre cuando django se refiera a este modelo en plural #    
     class Meta:
         verbose_name_plural = "Categorias"
 
+class SubCategoria(ClaseModelo):
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    descripcion = models.CharField(
+        max_length=100,
+        help_text='Descripcion de la categoria',
+        
+    )
 
-# Create your models here.
+    def __str__(self):
+        return '{}:{}'.format(self.categoria.descripcion,self.descripcion)
+    #Para guaradar la categoria en mayuscula#
+    def save(self):
+        self.descripcion = self.descripcion.upper()
+        super(SubCategoria, self).save()
+    #Para guardar el nombre cuando django se refiera a este modelo en plural #    
+    class Meta:
+        verbose_name_plural = "Sub-Categorias"
+        unique_together = ('categoria', 'descripcion')
+
+class Marca(ClaseModelo):
+    descripcion = models.CharField(
+        max_length=100,
+        help_text='Descripcion de la marca',
+        unique=True,
+    )
+    #Para cuando se haga referencia a categoria muestre la descripcion#
+    def __str__(self):
+        return '{}'.format(self.descripcion)
+    #Para guaradar la categoria en mayuscula#
+    def save(self):
+        self.descripcion = self.descripcion.upper()
+        super(Marca, self).save()
+    #Para guardar el nombre cuando django se refiera a este modelo en plural #    
+    class Meta:
+        verbose_name_plural = "Marca"
+
+class Hola(ClaseModelo):
+    descripcion = models.CharField(
+        max_length=100,
+        help_text='Descripcion de la marca',
+        unique=True,
+    )
+    #Para cuando se haga referencia a categoria muestre la descripcion#
+    def __str__(self):
+        return '{}'.format(self.descripcion)
+    #Para guaradar la categoria en mayuscula#
+    def save(self):
+        self.descripcion = self.descripcion.upper()
+        super(Marca, self).save()
+    #Para guardar el nombre cuando django se refiera a este modelo en plural #    
+    class Meta:
+        verbose_name_plural = "Marca"
